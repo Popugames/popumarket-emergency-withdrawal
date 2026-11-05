@@ -1,7 +1,5 @@
 # Retragere de urgență PopuMarket
 
-> **Stare: încă nu e activă pe mainnet.** Funcțiile sunt în testare pe testnet. Nu trimite aceste tranzacții pe mainnet până când acest anunț nu e scos.
-
 [Read in English](README.md)
 
 Acest ghid explică cum îți iei TCL-ul direct din contractul PopuMarket, fără site-ul sau serverele PopuMarket.

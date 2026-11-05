@@ -1,7 +1,5 @@
 # PopuMarket emergency withdrawal
 
-> **Status: not active on mainnet yet.** These functions are being tested on testnet. Don't send these transactions on mainnet until this notice is removed.
-
 [Citește în română](GHID-RO.md)
 
 This guide explains how to take your TCL directly from the PopuMarket contract, without the PopuMarket website or servers.
