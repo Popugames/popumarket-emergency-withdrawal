@@ -36,6 +36,8 @@ You can use this method only if you linked your wallet while PopuMarket was work
 
 The whole balance of the account goes to the linked wallet. To change your mind before step 4, send `cancelEmergencyWithdrawal@<ACCOUNT_ID>` instead.
 
+While PopuMarket is working, your request also cancels your open orders and offers that hold TCL, and what they hold returns to your balance. You can't spend or withdraw TCL on the market until you cancel the request or collect.
+
 ## Contract details
 
 | | |
@@ -50,7 +52,7 @@ The whole balance of the account goes to the linked wallet. To change your mind 
 | Function | Who can call it | What it does |
 |---|---|---|
 | `bindWallet` | The player, through the website | Links a wallet to the account. Needs a ticket signed by the PopuMarket server. |
-| `requestEmergencyWithdrawal@<ACCOUNT_ID>` | Linked wallet | Starts the 24-hour wait and blocks debits from the account |
+| `requestEmergencyWithdrawal@<ACCOUNT_ID>` | Linked wallet | Starts the 24-hour wait and blocks debits from the account after 10 minutes |
 | `cancelEmergencyWithdrawal@<ACCOUNT_ID>` | Linked wallet | Cancels the request |
 | `executeEmergencyWithdrawal@<ACCOUNT_ID>` | Linked wallet | After 24 hours, sends the whole account balance to the linked wallet |
 | `proposeWalletRecovery` | Owner (multisig) | Proposes a new wallet for an account, with a 7-day wait |
@@ -60,8 +62,8 @@ The whole balance of the account goes to the linked wallet. To change your mind 
 
 ## What this does and doesn't protect
 
-- **After you request:** the operator can't debit the account, and the guardian, the owner and a contract pause can't cancel the request or the payout.
-- **Before you request:** the PopuMarket operator can still execute operations on your balance.
+- **After you request:** the guardian, the owner and a contract pause can't cancel the request or the payout. The operator can't debit the account starting 10 minutes after the request, so operations already in progress can finish.
+- **Before you request and during those 10 minutes:** the PopuMarket operator can still execute operations on your balance.
 - **Contract updates:** the multisig owner can update the contract code.
 - **Lost wallet:** only the multisig can link a new wallet. The change is public for 7 days and the current wallet can cancel it.
 - **No linked wallet:** this method isn't available.

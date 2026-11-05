@@ -36,6 +36,8 @@ Poți folosi această metodă doar dacă ți-ai legat portofelul cât timp PopuM
 
 Tot soldul contului ajunge în portofelul legat. Dacă te răzgândești înainte de pasul 4, trimite în schimb `cancelEmergencyWithdrawal@<ID_CONT>`.
 
+Cât timp PopuMarket funcționează, cererea anulează și ordinele și ofertele tale deschise care țin TCL, iar ce țin revine în sold. Nu poți cheltui sau retrage TCL din piață până nu anulezi cererea sau iei TCL-ul.
+
 ## Detalii despre contract
 
 | | |
@@ -50,7 +52,7 @@ Tot soldul contului ajunge în portofelul legat. Dacă te răzgândești înaint
 | Funcție | Cine o poate apela | Ce face |
 |---|---|---|
 | `bindWallet` | Jucătorul, din site | Leagă un portofel de cont. Are nevoie de un bilet semnat de serverul PopuMarket. |
-| `requestEmergencyWithdrawal@<ID_CONT>` | Portofelul legat | Pornește cele 24 de ore și blochează debitările contului |
+| `requestEmergencyWithdrawal@<ID_CONT>` | Portofelul legat | Pornește cele 24 de ore și blochează debitările contului după 10 minute |
 | `cancelEmergencyWithdrawal@<ID_CONT>` | Portofelul legat | Anulează cererea |
 | `executeEmergencyWithdrawal@<ID_CONT>` | Portofelul legat | După 24 de ore, trimite tot soldul contului în portofelul legat |
 | `proposeWalletRecovery` | Proprietarul (multisig) | Propune un portofel nou pentru cont, cu așteptare de 7 zile |
@@ -60,8 +62,8 @@ Tot soldul contului ajunge în portofelul legat. Dacă te răzgândești înaint
 
 ## Ce protejează și ce nu
 
-- **După cerere:** operatorul nu poate debita contul, iar guardianul, proprietarul și pauza contractului nu pot anula cererea sau plata.
-- **Înainte de cerere:** operatorul PopuMarket poate executa în continuare operațiuni pe soldul tău.
+- **După cerere:** guardianul, proprietarul și pauza contractului nu pot anula cererea sau plata. Operatorul nu poate debita contul la 10 minute după cerere, ca operațiunile în curs să se poată termina.
+- **Înainte de cerere și în acele 10 minute:** operatorul PopuMarket poate executa în continuare operațiuni pe soldul tău.
 - **Actualizări:** proprietarul multisig poate actualiza codul contractului.
 - **Portofel pierdut:** doar multisig-ul poate lega un portofel nou. Schimbarea e publică timp de 7 zile, iar portofelul actual o poate anula.
 - **Fără portofel legat:** această metodă nu e disponibilă.
